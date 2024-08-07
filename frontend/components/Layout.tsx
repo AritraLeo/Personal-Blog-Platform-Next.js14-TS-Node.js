@@ -1,11 +1,12 @@
 // components/Layout.tsx
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
+import Navbar from './Navbar';
 
 const Container = styled.body`
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 3rem 4rem;
 `;
 
 const Header = styled.header`
@@ -31,6 +32,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
   <html>
+    <Navbar />
     <Header>
       {/* <h1>My Blog</h1> */}
     </Header>

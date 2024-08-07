@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import api from '../../utils/api';
-import { setToken } from '../../utils/auth';
+import { setToken, setUserID } from '../../utils/auth';
 
 const Form = styled.form`
   display: flex;
@@ -38,6 +38,7 @@ const Signup: React.FC = () => {
     try {
       const response = await api.post('/auth/signup', { email, password });
       setToken(response.data.token);
+      setUserID(response.data.user_id);
       router.push('/dashboard');
     } catch (error) {
       console.error('Error signing up:', error);

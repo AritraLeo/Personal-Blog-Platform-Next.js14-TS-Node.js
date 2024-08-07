@@ -18,7 +18,7 @@ export const signup = async (req: Request, res: Response) => {
         const payload = { userId: newUser.id };
         const token = jwt.sign(payload, process.env.JWT_SECRET as string, { expiresIn: '1h' });
 
-        res.json({ token });
+        res.json({ token, user_id: newUser.id });
     } catch (err) {
         res.status(500).send('Server error');
     }
@@ -36,7 +36,7 @@ export const login = async (req: Request, res: Response) => {
         const payload = { userId: user.id };
         const token = jwt.sign(payload, process.env.JWT_SECRET as string, { expiresIn: '1h' });
 
-        res.json({ token });
+        res.json({ token, user_id: user.id });
     } catch (err) {
         res.status(500).send('Server error');
     }

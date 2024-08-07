@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import api from '../../utils/api';
-import { getToken, removeToken } from '../../utils/auth';
+import { getToken, getUserId, removeToken } from '../../utils/auth';
 import { useRouter } from 'next/navigation';
 
 const Form = styled.form`
@@ -37,6 +37,7 @@ const Dashboard: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [posts, setPosts] = useState([]);
+    const [userId, setUserId] = useState(getUserId());
     const router = useRouter();
 
     useEffect(() => {
@@ -49,7 +50,7 @@ const Dashboard: React.FC = () => {
 
     const fetchUserPosts = async () => {
         try {
-            const response = await api.get('/posts?author=me');
+            const response = await api.get(`/posts?author=${userId}`);
             setPosts(response.data);
         } catch (error) {
             console.error('Error fetching user posts:', error);
@@ -64,7 +65,8 @@ const Dashboard: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await api.post('/posts', { title, content });
+            const response = await api.post('/post', { title, content });
+            console.log('Response:', response.data);
             setTitle('');
             setContent('');
             fetchUserPosts();

@@ -128,7 +128,7 @@ const LoginPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await api.post('/auth/login', { email, password });
+      const response = await api.post('/auth/login', { email, password }, { withCredentials: true });
 
       if (response.data) {
         console.log(response.data);

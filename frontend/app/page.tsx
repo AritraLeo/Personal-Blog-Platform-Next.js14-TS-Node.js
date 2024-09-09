@@ -4,7 +4,7 @@ import PostCard from '../components/PostCard';
 import { fetchPosts } from '../data/data';
 import api from '@/utils/api';
 
-interface Post {
+export interface Post {
   id: string;
   title: string;
   content: string;

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import api from '../../utils/api';
 import { getToken, getUserId, removeToken } from '../../utils/auth';
 import { useRouter } from 'next/navigation';
+import PostCard from '@/components/PostCard';
+import { Post } from '../page';
 
 const Form = styled.form`
   display: flex;
@@ -97,11 +99,12 @@ const Dashboard: React.FC = () => {
                 <Button type="submit">Create Post</Button>
             </Form>
             <h2>Your Posts</h2>
-            {posts.map((post: any) => (
-                <div key={post.id}>
-                    <h3>{post.title}</h3>
-                    <p>{post.content}</p>
-                </div>
+            {posts.map((post: Post) => (
+                <PostCard key={post.id} title={post.title} content={post.content} />
+                // <div key={post.id}>
+                //     <h3>{post.title}</h3>
+                //     <p>{post.content}</p>
+                // </div>
             ))}
         </div>
     );
